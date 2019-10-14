@@ -292,6 +292,17 @@ run_task (char **argv)
   printf ("Execution of '%s' complete.\n", task);
 }
 
+/* run echo */
+static void
+echo (void)
+{
+char key;
+key = input_getc();
+if(key == 'x')
+	shutdown();
+printf("%c%c", key, key);
+}
+
 /* Executes all of the actions specified in ARGV[]
    up to the null pointer sentinel. */
 static void
@@ -308,6 +319,7 @@ run_actions (char **argv)
   /* Table of supported actions. */
   static const struct action actions[] = 
     {
+	{"echo", 0, echo},
       {"run", 2, run_task},
 #ifdef FILESYS
       {"ls", 1, fsutil_ls},
